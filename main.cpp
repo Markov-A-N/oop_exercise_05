@@ -3,6 +3,13 @@
 
 template<typename T>
 class Queue {
+	using value_type = T;
+	using size_type = size_t;
+	using reference = value_type &;
+	using const_reference = const value_type &;
+	using pointer = value_type *;
+	using const_pointer = const value_type *;
+
 public:
 	Queue() : head{nullptr}, tail{head}, size{0} {};
 
@@ -23,6 +30,22 @@ public:
 	void Pop() {
 		head = head->next;
 		size--;
+	}
+
+	reference Front() {
+		return this->head->value;
+	}
+
+	const_reference Front() const {
+		return this->head->value;
+	}
+
+	reference Back() {
+		return this->tail->value;
+	}
+
+	const_reference Back() const {
+		return this->tail->value;
 	}
 
 	void Print() {
@@ -58,9 +81,9 @@ int main() {
 	q.Push(1);
 	q.Push(2);
 	q.Push(3);
-	q.Pop();
-	q.Pop();
-	q.Pop();
+	q.Print();
+	std::cout << q.Front() << "\n";
+	q.Front() = 10;
 	q.Print();
 	return 0;
 }
