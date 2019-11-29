@@ -28,8 +28,10 @@ public:
 	}
 
 	void Pop() {
-		head = head->next;
-		size--;
+		if (head) {
+			head = head->next;
+			size--;
+		}
 	}
 
 	reference Front() {
@@ -85,5 +87,12 @@ int main() {
 	std::cout << q.Front() << "\n";
 	q.Front() = 10;
 	q.Print();
+	q.Pop();
+	q.Print();
+	q.Pop();
+	q.Print();
+	q.Pop();
+	q.Print();
+	q.Pop();
 	return 0;
 }
