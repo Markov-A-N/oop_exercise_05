@@ -185,11 +185,11 @@ public:
 	}
 
 	reference Back() {
-		return this->tail->value;
+		return this->tail.lock()->value;
 	}
 
 	const_reference Back() const {
-		return this->tail->value;
+		return this->tail.lock()->value;
 	}
 
 	ForwardIterator Begin() {
