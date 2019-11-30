@@ -28,15 +28,12 @@ private:
 public:
 
 	class ForwardIterator {
-		using value_type = T;
-		using difference_type = ptrdiff_t;
-		using reference = value_type &;
-		using const_reference = const value_type &;
-		using pointer = T *;
-		using const_pointer = const T *;
-		using iterator_category = std::forward_iterator_tag;
-
 	public:
+		using value_type = T;
+	    using reference = T&;
+	    using pointer = T*;
+	    using difference_type = ptrdiff_t;
+	    using iterator_category = std::forward_iterator_tag;
 		friend class Queue;
 
 		ForwardIterator(std::shared_ptr<Node> it = nullptr) : ptr{it} {};
@@ -177,18 +174,26 @@ public:
 	}
 
 	reference Front() {
+		if (head == nullptr)
+			throw std::out_of_range("Empty item");
 		return this->head->value;
 	}
 
 	const_reference Front() const {
+		if (head == nullptr)
+			throw std::out_of_range("Empty item");
 		return this->head->value;
 	}
 
 	reference Back() {
+		if (head == nullptr)
+			throw std::out_of_range("Empty item");
 		return this->tail.lock()->value;
 	}
 
 	const_reference Back() const {
+		if (head == nullptr)
+			throw std::out_of_range("Empty item");
 		return this->tail.lock()->value;
 	}
 
