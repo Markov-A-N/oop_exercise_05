@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <memory>
+#include <algorithm>
 
 template<typename T>
 class Queue {
@@ -147,21 +148,31 @@ public:
 	}
 
 	ForwardIterator Erase(const ForwardIterator it) {
-		if (it == ForwardIterator{}) {
+		if (it == ForwardIterator{}) { //удаление несуществующего элемента
 			return End();
 		}
-		if (it->prev.lock() == nullptr) {
+		if (it->prev.lock() == nullptr && head == tail.lock()) { //удаление очереди, состоящей только из одного элемента
 			head = nullptr;
 			tail = head;
+			size = 0;
 			return End();
+		}
+		if (it->prev.lock() == nullptr) { //удаление первого элемента
+			it->next->prev.lock() = nullptr;
+			head = it->next;
+			size--;
+			return head;
 		}
 		ForwardIterator res = it.Next();
-		if (res == ForwardIterator{}) {
+		if (res == ForwardIterator{}) { //удаление последнего элемента
 			it->prev.lock()->next = nullptr;
+			size--;
 			return End();
 		}
+		//удаление элементов в промежутке
 		it->next->prev = it->prev;
 		it->prev.lock()->next = it->next;
+		size--;
 		return res;
 	}
 
@@ -210,12 +221,14 @@ public:
 	}
 
 	void Print() {
-		for (auto it = Begin(); it != End(); it++) {
-			std::cout << *it;
-			if (it.Next() != End()) {
+		ForwardIterator it = Begin();
+		std::for_each(Begin(), End(), [it, this](auto e)mutable{
+			std::cout << e;
+			if (it.Next() != this->End()) {
 				std::cout << " <- ";
 			}
-		}
+			it++;
+		});
 		std::cout << "\n";
 	}
 
