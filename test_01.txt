@@ -1,0 +1,27 @@
+Add 
+Push
+0 0  3 0  3 7
+Add 
+Push
+1 1  4 1  4 8
+Add 
+Iter
+-1 -1  3 -1  3 7
+1
+Print
+Remove 
+Pop
+Front
+Back
+Count_if
+22
+Remove
+Iter 
+2
+Print
+Remove
+Pop
+Remove
+Pop
+Print
+Exit

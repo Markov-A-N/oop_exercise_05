@@ -1,0 +1,14 @@
+Add 
+Push 
+0 0  5 0  5 9
+Add 
+Iter
+10 10  12 10  12 15
+3
+Add
+Iter
+0 0 1 1 -1 -1
+Print
+Front
+Back
+Exit
