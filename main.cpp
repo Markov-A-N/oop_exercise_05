@@ -49,11 +49,16 @@ int main() {
 				}
 				std::cout << "______________________________________" << std::endl;
 				std::cout << "Input index: ";
-				int i;
+				unsigned int i;
 				std::cin >> i;
 				std::cout << "______________________________________" << std::endl;
+				if (i > q.Size()) {
+					std::cout << "The index must be less than the number of elements" << std::endl;
+					std::cout << "______________________________________" << std::endl;
+					continue;
+				}
 				Queue<Triangle<int>>::ForwardIterator it = q.Begin();
-				for (int cnt = 0; cnt < i; cnt++) {
+				for (unsigned int cnt = 0; cnt < i; cnt++) {
 					it++;
 				}
 				q.Insert(it, t);
@@ -68,6 +73,11 @@ int main() {
 		}
 		else if (cmd == "Remove") {
 			std::cout << "______________________________________" << std::endl;
+			if (q.Empty()) {
+				std::cout << "Queue is empty" << std::endl;
+				std::cout << "______________________________________" << std::endl;
+				continue;
+			}
 			std::cout << "Delete item from front of queue[Pop] or to the iterator position[Iter]" << std::endl;
 			std::cout << "______________________________________" << std::endl;
 			std::cin >> cmd;
@@ -77,11 +87,16 @@ int main() {
 			}
 			else if (cmd == "Iter") {
 				std::cout << "Input index: ";
-				int i;
+				unsigned int i;
 				std::cin >> i;
 				std::cout << "______________________________________" << std::endl;
+				if (i > q.Size()) {
+					std::cout << "The index must be less than the number of elements" << std::endl;
+					std::cout << "______________________________________" << std::endl;
+					continue;
+				}
 				Queue<Triangle<int>>::ForwardIterator it = q.Begin();
-				for (int cnt = 0; cnt < i; cnt++) {
+				for (unsigned int cnt = 0; cnt < i; cnt++) {
 					it++;
 				}
 				q.Erase(it);
